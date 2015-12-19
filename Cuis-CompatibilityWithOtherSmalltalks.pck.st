@@ -1,6 +1,6 @@
 'From Cuis 4.2 of 25 July 2013 [latest update: #2009] on 31 May 2014 at 11:54:27.854525 am'!
 'Description Please enter a description for this package '!
-!provides: 'Cuis-CompatibilityWithOtherSmalltalks' 1 2!
+!provides: 'Cuis-CompatibilityWithOtherSmalltalks' 1 3!
 !requires: 'Network-Kernel' nil nil nil!
 !classDefinition: #GIFReadWriter category: #'Cuis-CompatibilityWithOtherSmalltalks'!
 ImageReadWriter subclass: #GIFReadWriter
@@ -249,16 +249,6 @@ name: name0  creationTime: creationTime  modificationTime: modificationTime   is
 !ColorForm methodsFor: '*Cuis-CompatibilityWithOtherSmalltalks' stamp: 'gsa 2/12/2013 16:20'!
 isColorForm
 	^true! !
-
-!FileDirectory methodsFor: '*Cuis-CompatibilityWithOtherSmalltalks' stamp: 'gsa 1/6/2013 12:48'!
-pathFromUrl: aFileUrl
-	
-	^String streamContents: [ :s | | first |
-		first := false.
-		aFileUrl path do: [ :p |
-			first ifTrue: [ s nextPut: self pathNameDelimiter ].
-			first := true.
-			s nextPutAll: p ] ].! !
 
 !Character methodsFor: '*Cuis-CompatibilityWithOtherSmalltalks' stamp: 'gsa 12/26/2012 08:41'!
 sameAs: aCharacter 
@@ -1108,15 +1098,16 @@ time
 
 	^ self asTime! !
 
-!TimeStamp class methodsFor: 'squeak protocol' stamp: 'fbs 4/20/2004 14:21'!
+!TimeStamp class methodsFor: 'squeak protocol' stamp: 'pb 12/19/2015 14:21'!
 current
 
 	| ts ticks |
 	ts := super now.
-	
+	"FIXME - no longer exists	
 	ticks := ts ticks.
 	ticks at: 3 put: 0.
 	ts ticks: ticks offset: ts offset.
+	"
 	
 	^ ts
 		
